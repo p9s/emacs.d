@@ -19,5 +19,40 @@
   (set-selection-coding-system (if (eq system-type 'windows-nt) 'utf-16-le 'utf-8))
   (prefer-coding-system 'utf-8))
 
+
+;;; Maximized setup 
+(add-to-list 'initial-frame-alist '(fullscreen . maximized ))
+
+
+;;; change default font
+(set-default-font "Monaco-16")
+
+;;; org-agenda setup
+(setq org-agenda-files (list "~/org-notes/Finance.org"
+                                "~/org-notes/Todo.org"
+                                "~/org-notes/Note.org"
+                                "~/org-notes/NoNMatchs.org"
+                                "~/org-notes/Project.org"))
+
+
+;;; org-capture configuration
+(setq org-capture-templates '( ("t" "Work todo"    entry (file+headline "~/org-notes/Todo.org" "Work")
+           "* TODO [#A] %? %^g\n \
+SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))\n \
+DEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+1w\"))\n \
+:PROPERTIES:\n \
+:CAPTURED: %U\n \
+:END:\n
+\n ")
+          ("f" "Finance" plain (file+function "~/org-notes/Finance.org" find-month-tree)
+            " | %U | %^{类别} | %^{描述} | %^{金额} |" :kill-buffer t)
+
+          ("n" "Notes" entry (file "~/org-notes/Note.org")
+           "* %^{heading} %T %^g\n  %?\n")
+
+          ("m" "MatchMissing" entry (file "~/org-notes/NoNMatchs.org")
+           "* %^{heading} %T %^g\n  %?\n")
+          ))
+
 (provide 'init-locales)
 ;;; init-locales.el ends here

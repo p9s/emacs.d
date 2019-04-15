@@ -25,7 +25,7 @@
 
 
 ;;; change default font
-(set-default-font "Monaco-16")
+(set-default-font "Monaco-14")
 
 ;;; org-agenda setup
 (setq org-agenda-files (list "~/org-notes/Finance.org"

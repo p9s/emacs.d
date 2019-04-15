@@ -88,7 +88,7 @@
 
 
 (when (fboundp 'display-line-numbers-mode)
-  (setq display-line-numbers-width 3)
+  (setq-default display-line-numbers-width 3)
   (add-hook 'prog-mode-hook 'display-line-numbers-mode))
 
 (when (maybe-require-package 'goto-line-preview)
@@ -222,13 +222,13 @@
 ;; use M-S-up and M-S-down, which will work even in lisp modes.
 ;;----------------------------------------------------------------------------
 (require-package 'move-dup)
-(global-set-key [M-up] 'md/move-lines-up)
-(global-set-key [M-down] 'md/move-lines-down)
-(global-set-key [M-S-up] 'md/move-lines-up)
-(global-set-key [M-S-down] 'md/move-lines-down)
+(global-set-key [M-up] 'md-move-lines-up)
+(global-set-key [M-down] 'md-move-lines-down)
+(global-set-key [M-S-up] 'md-move-lines-up)
+(global-set-key [M-S-down] 'md-move-lines-down)
 
-(global-set-key (kbd "C-c d") 'md/duplicate-down)
-(global-set-key (kbd "C-c u") 'md/duplicate-up)
+(global-set-key (kbd "C-c d") 'md-duplicate-down)
+(global-set-key (kbd "C-c u") 'md-duplicate-up)
 
 ;;----------------------------------------------------------------------------
 ;; Fix backward-up-list to understand quotes, see http://bit.ly/h7mdIL
@@ -249,7 +249,7 @@
 ;; Cut/copy the current line if no region is active
 ;;----------------------------------------------------------------------------
 (require-package 'whole-line-or-region)
-(add-hook 'after-init-hook 'whole-line-or-region-mode)
+(add-hook 'after-init-hook 'whole-line-or-region-global-mode)
 (after-load 'whole-line-or-region
   (diminish 'whole-line-or-region-local-mode))
 

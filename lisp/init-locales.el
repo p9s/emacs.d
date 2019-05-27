@@ -51,34 +51,67 @@
 
 
 ;;; change default font
-(set-default-font "Monaco-14")
+(set-default-font "Monaco-12")
 
 ;;; org-agenda setup
-(setq org-agenda-files (list "~/org-notes/Finance.org"
-                             "~/org-notes/Todo.org"
-                             "~/org-notes/Note.org"
-                             "~/org-notes/NoNMatchs.org"
-                             "~/org-notes/Project.org"))
+(setq org-agenda-files (list
+                        "~/Dropbox/gtd/inbox.org"
+                        "~/Dropbox/gtd/gtd.org"
+                        "~/Dropbox/gtd/tickler.org"
+                        "~/Dropbox/gtd/finace.org"
+                        ))
 
 
 ;;; org-capture configuration
-(setq org-capture-templates '( ("t" "Work todo"    entry (file+headline "~/org-notes/Todo.org" "Work")
-                                "* Next [#C] %? %^g\n \
+(setq org-capture-templates '( ("t" "Todo [inbox]"    entry
+                                (file+headline "~/Dropbox/gtd/inbox.org" "Tasks")
+                                "* TODO  %? %^g\n \
 SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))\n \
-DEADLINE: %(org-insert-time-stamp (org-read-date nil t \"+1w\"))\n \
 :PROPERTIES:\n \
 :CAPTURED: %U\n \
 :END:\n
 \n ")
-                               ("f" "Finance" plain (file+function "~/org-notes/Finance.org" find-month-tree)
+                               ("c" "Caicai todo [gtd]"    entry
+                                (file+olp "~/Dropbox/gtd/gtd.org" "Projects" "Caicai")
+                                "* TODO  %? %^g\n \
+SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))\n \
+:PROPERTIES:\n \
+:CAPTURED: %U\n \
+:END:\n
+\n ")
+                               ("d" "DeHongMIS todo [gtd]"    entry
+                                (file+olp "~/Dropbox/gtd/gtd.org" "Projects" "DeHong MIS")
+                                "* TODO  %? %^g\n \
+SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))\n \
+:PROPERTIES:\n \
+:CAPTURED: %U\n \
+:END:\n
+\n ")
+
+                               ("f" "Finance" plain (file+function "~/Dropbox/gtd/finace.org" find-month-tree)
                                 " | %U | %^{类别} | %^{描述} | %^{金额} |" :kill-buffer t)
 
-                               ("n" "Notes" entry (file "~/org-notes/Note.org")
+                               ("n" "Notes" entry (file "~/Dropbox/gtd/note.org")
                                 "* %^{heading} %T %^g\n  %?\n")
 
-                               ("m" "MatchMissing" entry (file "~/org-notes/NoNMatchs.org")
-                                "* %^{heading} %T %^g\n  %?\n")
+                               ("e" "XiXi Food" plain (file+function "~/Dropbox/gtd/xixi-food.org" find-month-tree)
+                                " | %U | %^{时间(AM/PM} | %^{食物} |" :kill-buffer t)
+
+                               ("T" "Tickler" entry (file+headline "~/Dropbox/gtd/tickler.org" "Tickler")
+                                "* [#A] %i%? \n %T")
                                ))
+
+(setq org-refile-targets '(("~/Dropbox/gtd/gtd.org" :maxlevel . 3)
+                           ("~/Dropbox/gtd/someday.org" :maxlevel . 1)
+                           ("~/Dropbox/gtd/tickler.org" :maxlevel . 2 )))
+
+(setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
+
+;;; (add-hook 'org-mode-hook 'my-org-mode-auto-save-settings)
+(defun my-org-mode-auto-save-settings()
+;;; (auto-save-mode 1) ; this is unnecessar as it is on by default
+  (set (make-local-variable 'auto-save-visited-file-name) t)
+  (setq auto-save-interval 20))
 
 (provide 'init-locales)
 ;;; init-locales.el ends here

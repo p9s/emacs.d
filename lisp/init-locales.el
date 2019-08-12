@@ -3,7 +3,7 @@
 ;;; Code:
 
 (defun get-year-and-month ()
-    (list (format-time-string "%Y年") (format-time-string "%m月")))
+  (list (format-time-string "%Y年") (format-time-string "%m月")))
 
 
 (defun find-month-tree ()
@@ -112,6 +112,15 @@ SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))\n \
 ;;; (auto-save-mode 1) ; this is unnecessar as it is on by default
   (set (make-local-variable 'auto-save-visited-file-name) t)
   (setq auto-save-interval 20))
+
+
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+;; Replace "sbcl" with the path to your implementation
+(setq inferior-lisp-program "sbcl")
+
+
+;;; for words guess
+(add-hook 'GSW (lambda () (text-scale-decrease 1)))
 
 (provide 'init-locales)
 ;;; init-locales.el ends here

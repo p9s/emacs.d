@@ -3,7 +3,7 @@
 ;;; Code:
 
 (require 'keyfreq)
-(keyfreq-mode 1evil-mode 1)
+(keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
 
 (provide 'init-keyfreq)

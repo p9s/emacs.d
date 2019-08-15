@@ -13,8 +13,8 @@
 (add-to-list 'auto-mode-alist '("\\.pod$" . pod-mode))
 (add-to-list 'auto-mode-alist '("\\.tt$" . tt-mode))
 
-(setq cperl-indent-level 4
-      cperl-close-paren-offset -4
+(setq cperl-indent-level 2
+      cperl-close-paren-offset -2
       ;; cperl-continued-statement-offset 4
       ;; cperl-indent-parens-as-block t
       ;; cperl-tab-always-indent t

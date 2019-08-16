@@ -129,6 +129,7 @@
 
 (require 'init-folding)
 (require 'init-dash)
+(require 'init-org-mind-map)
 
 ;;(require 'init-twitter)
 ;; (require 'init-mu)

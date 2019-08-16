@@ -128,7 +128,7 @@
 (require 'init-misc)
 
 (require 'init-folding)
-;;(require 'init-dash)
+(require 'init-dash)
 
 ;;(require 'init-twitter)
 ;; (require 'init-mu)
@@ -136,6 +136,9 @@
 
 (require 'init-evil)
 (require 'init-keyfreq)
+(require 'init-web-mode)
+(require 'init-window-numbering)
+(require 'init-youdao-dictionary)
 
 ;; Extra packages which don't require any configuration
 

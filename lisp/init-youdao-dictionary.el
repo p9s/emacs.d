@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'youdao-dictionary)
+(require-package 'youdao-dictionary)
 
 (setq url-automatic-caching t)
 

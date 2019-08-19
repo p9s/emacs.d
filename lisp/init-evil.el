@@ -24,5 +24,7 @@
 (define-key evil-operator-state-map (kbd "C-g") #'evil-keyboard-quit)
 
 
+(evil-set-initial-state 'org-agenda-mode 'emacs)
+
 (provide 'init-evil)
 ;;; init-evil.el ends here

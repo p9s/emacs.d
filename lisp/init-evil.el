@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'evil)
+(require-package 'evil)
 (evil-mode 1)
 
 ;; (use-package evil-surround

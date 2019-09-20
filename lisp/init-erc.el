@@ -9,7 +9,7 @@
       `((freenode     (("p9s" . ,freenode-nick-p9s-pass)))))
 
 (setq erc-autojoin-channels-alist
-      '(("freenode.net" "#perl5" "#perl6" "#perl6-dev")))
+      '(("freenode.net" "#perl6" "#" "#mojo" "#cro")))
 
 ;;; 命令列表
 ;;; /msg nickserv help	注冊 nickname

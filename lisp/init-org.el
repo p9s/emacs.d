@@ -403,6 +403,7 @@ typical word processor."
      (sql . t)
      (sqlite . t))))
 
+(add-hook 'auto-save-hook 'org-save-all-org-buffers)
 
 (provide 'init-org)
 ;;; init-org.el ends here

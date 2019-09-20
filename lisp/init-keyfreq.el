@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
-(require 'keyfreq)
+(require-package 'keyfreq)
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
 

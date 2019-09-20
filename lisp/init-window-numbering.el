@@ -3,7 +3,7 @@
 ;;; Code:
 
 
-(require 'window-numbering)
+(require-package 'window-numbering)
 (window-numbering-mode 1)
 (winner-mode 1)
 

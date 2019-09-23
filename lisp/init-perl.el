@@ -1,5 +1,6 @@
 ;;; init-perl.el --- Some helpful Perl code
 
+(exec-path-from-shell-copy-envs '("LANG" "LC_ALL" "LC_CTYPES"))
 (defalias 'perl-mode 'cperl-mode)
 
 (eval-after-load 'cperl-mode
@@ -13,36 +14,58 @@
 (add-to-list 'auto-mode-alist '("\\.pod$" . pod-mode))
 (add-to-list 'auto-mode-alist '("\\.tt$" . tt-mode))
 
-(setq cperl-indent-level 2
-      cperl-close-paren-offset -2
-      ;; cperl-continued-statement-offset 4
-      ;; cperl-indent-parens-as-block t
-      ;; cperl-tab-always-indent t
-      )
+(setq cperl-indent-level 4
+      cperl-close-paren-offset -4
+      cperl-indent-subs-specially nil
+      cperl-continued-statement-offset 4
+      cperl-indent-parens-as-block t
+      cperl-tabs-always-indent t)
 
-(exec-path-from-shell-copy-envs '("LANG" "LC_ALL" "LC_CTYPES"))
 
-(defun perltidy ()
-  "Run perltidy on the current region or buffer."
-  (interactive)
-  (save-excursion
-    (unless mark-active (mark-defun))
-    (shell-command-on-region (point) (mark) "perltidy -q" nil t)))
+;;; (setq after-load-alist
+;;;       (append after-load-alist
+;;;               '((cperl-mode
+;;;                  (defun cperl-backward-to-start-of-continued-exp (lim)
+;;;                    (goto-char containing-sexp)
+;;;                    (let ((sexp-start (following-char)))
+;;;                      (forward-char)
+;;;                      (skip-chars-forward " \t\n")
+;;;                      (if ( and (> (current-column) cperl-continued-statement-offset)
+;;;                                (memq sexp-start (append "([" nil)))
+;;;                          (backward-char cperl-continued-statement-offset))))))))
 
-(global-set-key "\C-ct" 'perltidy)
+(defun perltidy-dwim (arg)
+  "Perltidy a region of the entire buffer"
+  (interactive "P")
+  (let ((old-point (point))
+	(old-mark (mark t))
+	(currconf (current-window-configuration))
+	(buffer (generate-new-buffer "*perltidy*"))
+	(start)
+	(end))
+    (if (and mark-active transient-mark-mode)
+	(setq start (region-beginning)
+	      end (region-end))
+      (setq start (point-min)
+	    end (point-max)))
+    ;; set the PERLTIDY environment variable to the closest instance
+    ;; of .perltidyrc, but keep its value if it was set before.
+    (let ((old-perltidy-env (getenv "PERLTIDY")))
+      (setenv "PERLTIDY" (or old-perltidy-env
+			     (expand-file-name
+			      (locate-dominating-file (buffer-file-name) "~/.perltidyrc"))))
+      (shell-command-on-region start end "perltidy" buffer)
+      (setenv "PERLTIDY" old-perltidy-env))
+    (delete-region start end)
+    (insert-buffer buffer)
+    (kill-buffer buffer)
+    (goto-char (min old-point (point-max)))
+    (if old-mark (push-mark (min old-mark (point-max)) t))
+    (set-window-configuration currconf)))
 
-(add-hook 'cperl-mode-hook '(lambda ()
-                              (setq indent-tabs-mode nil)
-                              ;; BestPractices からぱくったがなんかうごいてない
-                              (setq fill-column 78)
-                              (setq auto-fill-mode t)
-                              ;; face設定。これはどっかちがうとこにうつす
-                              (set-face-background 'cperl-hash-face (face-background 'default))
-                              (setq cperl-hash-face 'cperl-hash-face)
-                              (make-face 'cperl-array-face)
-                              (set-face-foreground 'cperl-array-face "color-69")
-                              (set-face-background 'cperl-array-face (face-background 'default))
-                              (setq cperl-array-face 'cperl-array-face)
-                              ))
+(add-hook 'cperl-mode-hook
+	  (lambda ()
+	    (local-set-key (kbd "C-c t") 'perltidy-dwim)))
+
 (provide 'init-perl)
 ;;; init-perl.el ends here

@@ -14,6 +14,10 @@
 (add-to-list 'auto-mode-alist '("\\.pod$" . pod-mode))
 (add-to-list 'auto-mode-alist '("\\.tt$" . tt-mode))
 
+
+;;; Just space 
+(setq-default indent-tabs-mode nil)
+
 (setq cperl-indent-level 4
       cperl-close-paren-offset -4
       cperl-indent-subs-specially nil
@@ -21,18 +25,6 @@
       cperl-indent-parens-as-block t
       cperl-tabs-always-indent t)
 
-
-;;; (setq after-load-alist
-;;;       (append after-load-alist
-;;;               '((cperl-mode
-;;;                  (defun cperl-backward-to-start-of-continued-exp (lim)
-;;;                    (goto-char containing-sexp)
-;;;                    (let ((sexp-start (following-char)))
-;;;                      (forward-char)
-;;;                      (skip-chars-forward " \t\n")
-;;;                      (if ( and (> (current-column) cperl-continued-statement-offset)
-;;;                                (memq sexp-start (append "([" nil)))
-;;;                          (backward-char cperl-continued-statement-offset))))))))
 
 (defun perltidy-dwim (arg)
   "Perltidy a region of the entire buffer"

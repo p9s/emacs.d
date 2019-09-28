@@ -141,7 +141,8 @@
 (require 'init-window-numbering)
 (require 'init-youdao-dictionary)
 
-(require 'init-erc)
+;;; default disable erc
+;;; (require 'init-erc)
 ;; Extra packages which don't require any configuration
 
 (require-package 'gnuplot)

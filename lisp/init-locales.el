@@ -55,16 +55,16 @@
 
 ;;; org-agenda setup
 (setq org-agenda-files (list
-                        "~/Dropbox/gtd/inbox.org"
-                        "~/Dropbox/gtd/gtd.org"
-                        "~/Dropbox/gtd/tickler.org"
-                        "~/Dropbox/gtd/finace.org"
+                        "~/gtd/inbox.org"
+                        "~/gtd/gtd.org"
+                        "~/gtd/tickler.org"
+                        "~/gtd/finace.org"
                         ))
 
 
 ;;; org-capture configuration
 (setq org-capture-templates '( ("t" "Todo [inbox]"    entry
-                                (file+headline "~/Dropbox/gtd/inbox.org" "Tasks")
+                                (file+headline "~/gtd/inbox.org" "Tasks")
                                 "* TODO  %? %^g\n \
 SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))\n \
 :PROPERTIES:\n \
@@ -72,7 +72,7 @@ SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))\n \
 :END:\n
 \n ")
                                ("c" "Caicai todo [gtd]"    entry
-                                (file+olp "~/Dropbox/gtd/gtd.org" "Projects" "Caicai")
+                                (file+olp "~/gtd/gtd.org" "Projects" "Caicai")
                                 "* TODO  %? %^g\n \
 SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))\n \
 :PROPERTIES:\n \
@@ -80,7 +80,7 @@ SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))\n \
 :END:\n
 \n ")
                                ("d" "DeHongMIS todo [gtd]"    entry
-                                (file+olp "~/Dropbox/gtd/gtd.org" "Projects" "DeHong MIS")
+                                (file+olp "~/gtd/gtd.org" "Projects" "DeHong MIS")
                                 "* TODO  %? %^g\n \
 SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))\n \
 :PROPERTIES:\n \
@@ -88,22 +88,22 @@ SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))\n \
 :END:\n
 \n ")
 
-                               ("f" "Finance" plain (file+function "~/Dropbox/gtd/finace.org" find-month-tree)
+                               ("f" "Finance" plain (file+function "~/gtd/finace.org" find-month-tree)
                                 " | %U | %^{类别} | %^{描述} | %^{金额} |" :kill-buffer t)
 
-                               ("n" "Notes" entry (file "~/Dropbox/gtd/note.org")
+                               ("n" "Notes" entry (file "~/gtd/note.org")
                                 "* %^{heading} %T %^g\n  %?\n")
 
-                               ("e" "XiXi Food" plain (file+function "~/Dropbox/gtd/xixi-food.org" find-month-tree)
+                               ("e" "XiXi Food" plain (file+function "~/gtd/xixi-food.org" find-month-tree)
                                 " | %U | %^{时间(AM/PM} | %^{食物} |" :kill-buffer t)
 
-                               ("T" "Tickler" entry (file+headline "~/Dropbox/gtd/tickler.org" "Tickler")
+                               ("T" "Tickler" entry (file+headline "~/gtd/tickler.org" "Tickler")
                                 "* [#A] %i%? \n %T")
                                ))
 
-(setq org-refile-targets '(("~/Dropbox/gtd/gtd.org" :maxlevel . 3)
-                           ("~/Dropbox/gtd/someday.org" :maxlevel . 1)
-                           ("~/Dropbox/gtd/tickler.org" :maxlevel . 2 )))
+(setq org-refile-targets '(("~/gtd/gtd.org" :maxlevel . 3)
+                           ("~/gtd/someday.org" :maxlevel . 1)
+                           ("~/gtd/tickler.org" :maxlevel . 2 )))
 
 (setq org-todo-keywords '((sequence "TODO(t)" "WAITING(w)" "|" "DONE(d)" "CANCELLED(c)")))
 
@@ -114,9 +114,9 @@ SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))\n \
   (setq auto-save-interval 20))
 
 
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
+;;; (load (expand-file-name "~/quicklisp/slime-helper.el"))
 ;; Replace "sbcl" with the path to your implementation
-(setq inferior-lisp-program "sbcl")
+;;; (setq inferior-lisp-program "sbcl")
 
 
 ;;; for words guess

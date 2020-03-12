@@ -51,7 +51,7 @@
 
 
 ;;; change default font
-(set-default-font "Monaco-12")
+(set-default-font "Monaco-18")
 
 ;;; org-agenda setup
 (setq org-agenda-files (list
@@ -59,6 +59,7 @@
                         "~/gtd/gtd.org"
                         "~/gtd/tickler.org"
                         "~/gtd/finace.org"
+                        "~/gtd/Project.org"
                         ))
 
 
@@ -121,6 +122,17 @@ SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))\n \
 
 ;;; for words guess
 (add-hook 'GSW (lambda () (text-scale-decrease 1)))
+
+
+;;; 设置 org-tab 中英文混排对齐功能
+(defun self-font()
+  (interactive)
+  (set-frame-font (format "%s:pixelsize=%d" "Monaco" 13) t)
+  (dolist (charset '(kana han symbol cjk-misc bopomofo))
+    (set-fontset-font (frame-parameter nil 'font) charset
+                      (font-spec :family "Hiragino Sans GB W3" :size 16))))
+
+(if window-system (self-font))
 
 (provide 'init-locales)
 ;;; init-locales.el ends here

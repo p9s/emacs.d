@@ -21,6 +21,8 @@
 ;; TODO states, which should make sense to GTD adherents.
 
 ;;; Code:
+;;; 更新org-mode 默认的省略号
+(setq org-ellipsis " ⤵")
 
 (when *is-a-mac*
   (maybe-require-package 'grab-mac-link))
@@ -405,5 +407,26 @@ typical word processor."
 
 (add-hook 'auto-save-hook 'org-save-all-org-buffers)
 
+
+(defun my-screenshot ()
+  "Take a screenshot into a unique-named file in the current buffer file directory and insert a link to this file."
+  (interactive)
+  (setq filename
+        (concat (make-temp-name "./") ".png"))
+  (setq fullfilename
+        (concat (file-name-directory (buffer-file-name)) "images/blog/" filename))
+  (if (file-accessible-directory-p (concat (file-name-directory
+                                            (buffer-file-name)) "images/blog/"))
+      nil
+    (make-directory "images/blog/" t))
+  (call-process-shell-command "screencapture" nil nil nil nil "-i" (concat
+                                                                    "\"" fullfilename "\"" ))
+  (insert (concat "[[./images/blog/" filename "]]"))
+  (org-display-inline-images)
+  )
+
+
+;;; Always show inline imgages
+(setq org-startup-with-inline-images t)
 (provide 'init-org)
 ;;; init-org.el ends here

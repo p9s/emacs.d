@@ -59,6 +59,7 @@
                         "~/gtd/gtd.org"
                         "~/gtd/tickler.org"
                         "~/gtd/finace.org"
+                        "~/gtd/Project.org"
                         ))
 
 

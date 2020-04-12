@@ -46,7 +46,7 @@
   (prefer-coding-system 'utf-8))
 
 
-;;; Maximized setup 
+;;; Maximized setup
 (add-to-list 'initial-frame-alist '(fullscreen . maximized ))
 
 
@@ -133,6 +133,11 @@ SCHEDULED: %(org-insert-time-stamp (org-read-date nil t \"+1d\"))\n \
                       (font-spec :family "Hiragino Sans GB W3" :size 16))))
 
 (if window-system (self-font))
+
+
+;;自动清除行位空格
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
 (provide 'init-locales)
 ;;; init-locales.el ends here

@@ -6,6 +6,10 @@
 
 ;;; Code:
 
+;;; socks setup
+(setq url-gateway-method 'socks)
+(setq socks-server '("Default server" "127.0.0.1" 1086 5))
+
 ;; Produce backtraces when errors occur
 (setq debug-on-error t)
 
@@ -110,12 +114,12 @@
 (require 'init-rust)
 ;;(require 'init-toml)
 (require 'init-yaml)
-;;(require 'init-docker)
+(require 'init-docker)
 (require 'init-terraform)
 ;;(require 'init-nix)
 (maybe-require-package 'nginx-mode)
 
-;;(require 'init-paredit)
+(require 'init-paredit)
 (require 'init-lisp)
 (require 'init-slime)
 (require 'init-clojure)

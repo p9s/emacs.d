@@ -144,6 +144,7 @@
 (require 'init-web-mode)
 (require 'init-window-numbering)
 (require 'init-youdao-dictionary)
+(require 'init-indent-guide )
 
 ;;; default disable erc
 ;;; (require 'init-erc)

@@ -7,8 +7,14 @@
 ;;; Code:
 
 ;;; socks setup
-(setq url-gateway-method 'socks)
-(setq socks-server '("Default server" "127.0.0.1" 1086 5))
+;;; (setq url-gateway-method 'socks)
+;;; (setq socks-server '("Default server" "127.0.0.1" 1086 5))
+
+;;; default variables for autoinsert module
+(setq user-full-name "p9s"
+      user-mail-address "mc.cheung@aol.com"
+      gc-cons-percentage 0.6
+      file-name-handler-alist nil)
 
 ;; Produce backtraces when errors occur
 (setq debug-on-error t)
@@ -68,6 +74,8 @@
 (require 'init-uniquify)
 (require 'init-ibuffer)
 (require 'init-flycheck)
+;;; 自动插入文件头
+(require 'init-auto-insert)
 
 (require 'init-recentf)
 (require 'init-smex)
